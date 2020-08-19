@@ -27,5 +27,5 @@ def compare():
     return True
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     compare()
