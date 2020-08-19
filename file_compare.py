@@ -1,30 +1,31 @@
+import logging
 import os
-from os.path import join, getsize
+from os.path import getsize, join
 
-
-class CyclicDependencyError(ValueError):
-    """Raised whe a circular dependency is found"""
+LOGGER = logging.getLogger(__name__)
 
 
 def compare():
     try:
         for root, dirs, files in os.walk('data/from/compare'):
-            print(root, "consumes", end=" ")
-            print(sum(getsize(join(root, name)) for name in files), end=" ")
-            print("bytes in", len(files), "non-directory files")
+            LOGGER.debug(root, 'consumes', end=' ')
+            LOGGER.debug(
+                sum(getsize(join(root, name)) for name in files), end=' ')
+            LOGGER.debug('bytes in', len(files), 'non-directory files')
     except OSError as e:
-        print('Exception occurred while reading from/compare', e)
+        LOGGER.error('Exception occurred while reading from/compare', e)
 
     try:
         for root, dirs, files in os.walk('data/to/compare'):
-            print(root, "consumes", end=" ")
-            print(sum(getsize(join(root, name)) for name in files), end=" ")
-            print("bytes in", len(files), "non-directory files")
+            LOGGER.debug(root, 'consumes', end=' ')
+            LOGGER.debug(
+                sum(getsize(join(root, name)) for name in files), end=' ')
+            LOGGER.debug('bytes in', len(files), 'non-directory files')
     except OSError as e:
-        print('Exception occurred while reading to/compare', e)
+        LOGGER.error('Exception occurred while reading to/compare', e)
 
     return True
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     compare()
