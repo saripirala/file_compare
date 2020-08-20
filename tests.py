@@ -13,9 +13,3 @@ class TestDataCompare(unittest.TestCase):
         os_walk.side_effect = OSError
         with self.assertRaises(OSError):
             file_compare.compare()
-
-    @mock.patch('os.walk')
-    def test_read_dir_exception(self, os_walk):
-        os_walk.side_effect = OSError
-        with self.assertRaises(OSError):
-            file_compare.compare()

@@ -14,7 +14,8 @@ def read_dir(path):
             LOGGER.debug('bytes in', len(files), 'non-directory files')
         return files
     except OSError as e:
-        LOGGER.error('Exception occurred while reading from/compare %s', str(e))
+        LOGGER.error(
+            'Exception occurred while reading %s %s', path, str(e))
         raise OSError
 
 
